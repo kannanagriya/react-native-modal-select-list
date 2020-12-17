@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList,Text } from 'react-native';
 import PropTypes from 'prop-types';
 import optionsDefaultProps from '../constants/optionsDefaultProps';
 import optionPropTypes from '../constants/optionsPropTypes';
@@ -198,14 +198,16 @@ class SelectListContent extends PureComponent {
   renderRow(item, index, count) {
     const isLastRow = index === (count - 1);
     const { onRowSelected, numberOfLines } = this.props;
-    return item.visible && (
-      <SelectListRow
-        {...item}
-        onRowSelected={onRowSelected}
-        numberOfLines={numberOfLines}
-        isLastRow={isLastRow}
-      />
-    );
+
+    if(item.visible){
+      return  <SelectListRow
+          {...item}
+          onRowSelected={onRowSelected}
+          numberOfLines={numberOfLines}
+          isLastRow={isLastRow}
+        />
+    }
+
   }
 
   renderFooter() {
@@ -215,17 +217,34 @@ class SelectListContent extends PureComponent {
     );
   }
 
+   EmptyListMessage = ({item}) => {
+    return (
+      // Flat List Item
+      <Text
+        style={{fontSize:15,color:'#000',textAlign:'center',padding:15}}>
+        No data found
+      </Text>
+    );
+  };
+
   render() {
-    const { options } = this.state;
+    let { options } = this.state;
+    let moptions = [];
+    for(var i=0;i<options.length;i++){
+      if(options[i].visible){
+        moptions.push(options[i]);
+      }
+    }
     return (
       <SelectListContentContainer>
         <FlatList
-          data={options}
+          data={moptions}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => this.renderRow(item, index, options.length)}
           ListFooterComponent={() => this.renderFooter()}
           onEndReached={() => this.handleEndListReached()}
           onEndReachedThreshold={1}
+          ListEmptyComponent={this.EmptyListMessage}
         />
       </SelectListContentContainer>
     );
