@@ -10,10 +10,12 @@ export const SelectListRowContainer = styled.TouchableOpacity`
   border-bottom-width: ${({ isLastRow }) => (isLastRow ? 0 : 1)};
   border-color: #EEE;
   justify-content: center;
+  font-family:'Montserrat-Regular';
 `;
 
 export const SelectListRowText = styled.Text`
   font-size: ${SELECT_LIST_ROW_TEXT_FONT_SIZE};
+  font-family:'Montserrat-Regular';
   padding-top: 16;
   padding-right: 16;
   padding-bottom: 16;
