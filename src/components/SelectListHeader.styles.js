@@ -41,6 +41,7 @@ export const SelectListHeaderCloseButton = styled.TouchableOpacity`
 export const SelectListHeaderCloseButtonText = styled.Text`
   text-transform: uppercase;
   font-weight: bold;
+  margin-left: 10;
   font-family:'Montserrat-SemiBold';
   color: ${({ buttonTextColor }) => buttonTextColor || SELECT_LIST_HEADER_CLOSE_BUTTON_TEXT_COLOR};
 `;
@@ -48,7 +49,7 @@ export const SelectListHeaderCloseButtonText = styled.Text`
 export const SelectListHeaderInputContainer = styled.View`
   flex: 1;
   height: ${SELECT_LIST_HEADER_INPUT_SIZE};
-  margin-left: 16;
+  margin-left: 0;
   flex-direction: row;
   align-items: center;
   background-color: #FFF;
